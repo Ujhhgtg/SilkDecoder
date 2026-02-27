@@ -18,6 +18,7 @@ android {
             cmake {
                 cppFlags '-std=c++17 -frtti -fexceptions -DANDROID -DSTDC_HEADERS -Werror'
                 cFlags '-frtti -fexceptions -DANDROID -DSTDC_HEADERS -Werror'
+                arguments '-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON'
             }
 
             ndk {
@@ -38,7 +39,7 @@ android {
         targetCompatibility JavaVersion.VERSION_21
     }
 
-    ndkVersion "27.0.12077973"
+    ndkVersion "29.0.14206865"
 
     externalNativeBuild {
         cmake {
