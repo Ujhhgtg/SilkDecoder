@@ -30,7 +30,7 @@ int silk2pcm(String silkFilePath, String pcmFilePath, int sampleRate) {
 
     // 打开输入文件
     FILE *silkFile = fopen(silkFilePath, "rb");
-    if (silkFile == NULL) {
+    if (silkFile == nullptr) {
         LOG_E("Error: could not open file %s", silkFilePath);
         return 0;
     }
@@ -67,12 +67,12 @@ int silk2pcm(String silkFilePath, String pcmFilePath, int sampleRate) {
 
     // 打开输出文件
     FILE *pcmFile = fopen(pcmFilePath, "wb");
-    if (pcmFile == NULL) {
+    if (pcmFile == nullptr) {
         LOG_E("Error: could not open file %s", pcmFilePath);
         return 0;
     }
 
-    while (1) {
+    while (true) {
         // 读取有效数据大小
         counter = fread(&validDataLen, sizeof(SKP_int16), 1, silkFile);
         if (validDataLen < 0 || counter < 1) {
@@ -133,7 +133,7 @@ int silk2pcm(String silkFilePath, String pcmFilePath, int sampleRate) {
 int pcm2wav(String pcmFilePath, String wavFilePath, int sampleRate) {
     // 打开PCM文件
     FILE *pcmFile = fopen(pcmFilePath, "rb");
-    if (pcmFile == NULL) {
+    if (pcmFile == nullptr) {
         LOG_E("Error: could not open file %s", pcmFilePath);
         return 0;
     }
@@ -145,7 +145,7 @@ int pcm2wav(String pcmFilePath, String wavFilePath, int sampleRate) {
 
     // 打开WAV文件
     FILE *wavFile = fopen(wavFilePath, "wb");
-    if (wavFile == NULL) {
+    if (wavFile == nullptr) {
         LOG_E("Error: could not open file %s", pcmFilePath);
         return 0;
     }
@@ -192,20 +192,20 @@ int pcm2wav(String pcmFilePath, String wavFilePath, int sampleRate) {
  */
 int pcm2mp3(String pcmFilePath, String mp3FilePath, int sampleRate, int bitrate) {
     int readLen, writeLen;
-    int PCM_SIZE = 8192;
-    int MP3_SIZE = 8192;
+    constexpr int PCM_SIZE = 8192;
+    constexpr int MP3_SIZE = 8192;
     short int pcmBuffer[PCM_SIZE];
     unsigned char mp3Buffer[MP3_SIZE];
 
     // 打开文件
     FILE *pcmFile = fopen(pcmFilePath, "rb");
-    if (pcmFile == NULL) {
+    if (pcmFile == nullptr) {
         LOG_E("Error: could not open file %s", pcmFilePath);
         return 0;
     }
 
     FILE *mp3File = fopen(mp3FilePath, "wb");
-    if (mp3File == NULL) {
+    if (mp3File == nullptr) {
         LOG_E("Error: could not open file %s", mp3FilePath);
         return 0;
     }

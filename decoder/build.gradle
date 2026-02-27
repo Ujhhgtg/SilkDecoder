@@ -1,22 +1,23 @@
 plugins {
     id 'com.android.library'
+    id 'maven-publish'
 }
 
 android {
     namespace 'xyz.xxin.silkdecoder'
-    compileSdk dev.compileSdk
+    compileSdk 36
 
     defaultConfig {
-        minSdk dev.minSdk
-        targetSdk dev.targetSdk
+        minSdk 29
+        targetSdk 36
 
-        versionCode dev.versionCode
-        versionName dev.versionName
+        versionCode 1
+        versionName "1.0"
 
         externalNativeBuild {
             cmake {
-                cppFlags '-std=c++17 -frtti -fexceptions -Werror -DANDROID -DSTDC_HEADERS  -Werror'
-                cFlags '-frtti -fexceptions -Werror -DANDROID -DSTDC_HEADERS  -Werror'
+                cppFlags '-std=c++17 -frtti -fexceptions -DANDROID -DSTDC_HEADERS -Werror'
+                cFlags '-frtti -fexceptions -DANDROID -DSTDC_HEADERS -Werror'
             }
 
             ndk {
@@ -37,7 +38,6 @@ android {
         targetCompatibility JavaVersion.VERSION_21
     }
 
-    // 指定NDK版本
     ndkVersion "27.0.12077973"
 
     externalNativeBuild {
@@ -46,9 +46,27 @@ android {
             version '3.22.1+'
         }
     }
+
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
-dependencies {
-    implementation 'androidx.appcompat:appcompat:1.7.1'
-    implementation 'com.google.android.material:material:1.13.0'
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                groupId = 'com.local.xxinPro'
+                artifactId = 'SilkDecoder'
+                version = "1.0"
+
+                from components.release
+            }
+        }
+    }
 }
+
+dependencies {}
