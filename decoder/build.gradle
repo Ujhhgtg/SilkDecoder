@@ -1,9 +1,6 @@
 plugins {
     id 'com.android.library'
-    id 'maven-publish'      // 引入maven-publish插件
 }
-
-apply from: '../maven.gradle'
 
 android {
     namespace 'xyz.xxin.silkdecoder'
@@ -18,11 +15,7 @@ android {
 
         externalNativeBuild {
             cmake {
-                // -std=c++11:  指定使用C++11标准编译
-                // -frtti:      开启运行时类型信息（RTTI）
-                // -fexceptions:开启异常处理
-                // -Werror:     将所有警告视为错误
-                cppFlags '-std=c++11 -frtti -fexceptions -Werror -DANDROID -DSTDC_HEADERS  -Werror'
+                cppFlags '-std=c++17 -frtti -fexceptions -Werror -DANDROID -DSTDC_HEADERS  -Werror'
                 cFlags '-frtti -fexceptions -Werror -DANDROID -DSTDC_HEADERS  -Werror'
             }
 
@@ -40,24 +33,22 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
     }
 
     // 指定NDK版本
-    ndkVersion "26.1.10909125"
+    ndkVersion "27.0.12077973"
 
     externalNativeBuild {
         cmake {
-            // 指定cmake构建脚本位置
             path file('src/main/cpp/CMakeLists.txt')
-            // 指定cmake构建脚本的版本
-            version '3.22.1'
+            version '3.22.1+'
         }
     }
 }
 
 dependencies {
-    implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.11.0'
+    implementation 'androidx.appcompat:appcompat:1.7.1'
+    implementation 'com.google.android.material:material:1.13.0'
 }
